@@ -44,13 +44,11 @@ SMR(Summary-data-based Mendelian Randomization) is a method that uses summary da
 ### Inverse probability of treatment weighting (IPTW)
 To mimic randomized controlled trials (RCT) to evaluate the focal drug’s effect, we applied the Inverse Probability of Treatment weighting (IPTW) framework to create a pseudo-population wherein confounding variables are evenly distributed between the treated and control groups. In the IPTW framework, individuals are assigned weights based on the inverse of their propensity scores (PS), which represent their probability of being exposed to risk factors or a specific intervention, such as a treated drug, based on their baseline characteristics. We trained a logistic regression propensity score (LR-PS) model with L1 or L2 regularization on patients' treatment assignments Z and covariates, including age, gender, comorbidities, etc. We trained and selected the logistic model (Eq.1) with the highest area under curve (AUC) using a 10-folder cross-validation. We used the selected model to calculate all patient’s stabilized weights (Eq. 2). These weights are used to calculate the standardized mean difference (SMD, Eq.3) of the covariate’s prevalence in treated and control groups. A covariate d is defined as unbalanced if SMD(*d*)>0.1 in IPTW framework (Eqs. 3, 4). A trial is balanced if it contains < 10% unbalanced covariates (Eqs. 5).
 
+The logistic regression is defined as follows (Eq.1):
 ```math
-The logistic regression is defined as follows:
-\log\left(\frac{P(\mathbf{Z}=1)}{1-P(\mathbf{Z}=1)}\right) = \beta_0 + \beta_1 \mathbf{X}_1 + \beta_2 \mathbf{X}_2 + \ldots + \beta_n \mathbf{X}_n (Eq.1)
+\log\left(\frac{P(\mathbf{Z}=1)}{1-P(\mathbf{Z}=1)}\right) = \beta_0 + \beta_1 \mathbf{X}_1 + \beta_2 \mathbf{X}_2 + \ldots + \beta_n \mathbf{X}_n
 ```
-```math
-where $\mathbit{Z}$ refers to treatment assignment (1 for treated patient group and 0 for control patient group) and $\mathbit{X}(\mathbit{X}_1, \mathbit{X}_2, \ldots, \mathbit{X}_n)$ for baseline covariates. The propensity score is defined as $P(\mathbit{Z}=1 \mid \mathbit{X})$ and the stabilized IPTW of each individual is calculated as follows:
-```
+where ***Z*** refers to treatment assignment (1 for treated patient group and 0 for control patient group) and ***X***(***X1***,***X2***, ..., ***Xn***) for baseline covariates. The propensity score is defined as \( P(\mathbf{Z}=1 | \mathbf{X}) \) and the stabilized IPTW of each individual is calculated as follows: 
 ```math
 \mathbf{w} = \frac{\mathbf{Z} \times P(\mathbf{Z}=1)}{P(\mathbf{Z}=1 \mid \mathbf{X})} + \frac{(1 - \mathbf{Z}) \times (1 - P(\mathbf{Z}=1))}{1 - P(\mathbf{Z}=1 \mid \mathbf{X})} (Eq.2)
 ```
