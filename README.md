@@ -46,7 +46,10 @@ To mimic randomized controlled trials (RCT) to evaluate the focal drug’s effec
 
 ```math
 \log\left(\frac{P(\mathbf{Z}=1)}{1-P(\mathbf{Z}=1)}\right) = \beta_0 + \beta_1 \mathbf{X}_1 + \beta_2 \mathbf{X}_2 + \ldots + \beta_n \mathbf{X}_n
-```
+```(Eq.1)
+```math
+\mathbf{w} = \frac{\mathbf{Z} \times P(\mathbf{Z}=1)}{P(\mathbf{Z}=1 \mid \mathbf{X})} + \frac{(1 - \mathbf{Z}) \times (1 - P(\mathbf{Z}=1))}{1 - P(\mathbf{Z}=1 \mid \mathbf{X})}
+```(Eq.2)
 
 ### Cox proportional hazard model
 
