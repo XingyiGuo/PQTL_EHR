@@ -48,9 +48,7 @@ The logistic regression is defined as follows (Eq.1):
 ```math
 \log\left(\frac{P(\mathbf{Z}=1)}{1-P(\mathbf{Z}=1)}\right) = \beta_0 + \beta_1 \mathbf{X}_1 + \beta_2 \mathbf{X}_2 + \ldots + \beta_n \mathbf{X}_n
 ```
-where ***Z*** refers to treatment assignment (1 for treated patient group and 0 for control patient group) and ***X***(***X1***,***X2***, ..., ***Xn***) for baseline covariates. The propensity score is defined as  
-$$ P(\mathbf{Z}=1 | \mathbf{X}) $$
-and the stabilized IPTW of each individual is calculated as follows:
+where ***Z*** refers to treatment assignment (1 for treated patient group and 0 for control patient group) and ***X***(***X1***,***X2***, ..., ***Xn***) for baseline covariates. The propensity score is defined as  \[ P(\mathbf{Z}=1 | \mathbf{X}) \] and the stabilized IPTW of each individual is calculated as follows:
 ```math
 \mathbf{w} = \frac{\mathbf{Z} \times P(\mathbf{Z}=1)}{P(\mathbf{Z}=1 \mid \mathbf{X})} + \frac{(1 - \mathbf{Z}) \times (1 - P(\mathbf{Z}=1))}{1 - P(\mathbf{Z}=1 \mid \mathbf{X})} (Eq.2)
 ```
