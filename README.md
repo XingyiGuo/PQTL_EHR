@@ -42,14 +42,19 @@ SMR(Summary-data-based Mendelian Randomization) is a method that uses summary da
 3) 1000G reference files (1kg.chr1.phase3.20130502.Eur) are downloaded from [1000G project](https://www.internationalgenome.org/category/genotypes/)
 
 ### Inverse probability of treatment weighting (IPTW)
+To mimic randomized controlled trials (RCT) to evaluate the focal drug’s effect, we applied the Inverse Probability of Treatment weighting (IPTW) framework to create a pseudo-population wherein confounding variables are evenly distributed between the treated and control groups. In the IPTW framework, individuals are assigned weights based on the inverse of their propensity scores (PS), which represent their probability of being exposed to risk factors or a specific intervention, such as a treated drug, based on their baseline characteristics. We trained a logistic regression propensity score (LR-PS) model with L1 or L2 regularization on patients' treatment assignments Z and covariates, including age, gender, comorbidities, etc. We trained and selected the logistic model (Eq.1) with the highest area under curve (AUC) using a 10-folder cross-validation. We used the selected model to calculate all patient’s stabilized weights (Eq. 2). These weights are used to calculate the standardized mean difference (SMD, Eq.3) of the covariate’s prevalence in treated and control groups. A covariate d is defined as unbalanced if SMD(*d*)>0.1 in IPTW framework (Eqs. 3, 4). A trial is balanced if it contains < 10% unbalanced covariates (Eqs. 5).
 
+```math
+log{\left(P\left(\mathbit{Z}=1\right)/\left(1-P\left(\mathbit{Z}=1\right)\right)\right)}=\beta_0+\beta_1\mathbit{X}_1+\beta_2\mathbit{X}_2+\ldots+\beta_n\mathbit{X}_n
+```
 
 ### Cox proportional hazard model
 
+
 ### Figures
-`./Figures/Figure4.tgz`
-`./Figures/Figure5.tgz`
-`./Figures/FigureS3.tgz`
+- ./Figures/Figure4.tgz
+- ./Figures/Figure5.tgz
+- ./Figures/FigureS3.tgz
 
 ## Contact
 Qing Li: qing.li@vumc.org
