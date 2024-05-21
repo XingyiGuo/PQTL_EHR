@@ -60,13 +60,14 @@ The Standardized Mean Difference (SMD) between the treated group (`x_treat`) and
 
 ```math
 SMD(x_{\text{treat}} - x_{\text{control}}) = \frac{|\mu_{\text{treat}} - \mu_{\text{control}}|}{\sqrt{(\mathbf{S}_{\text{treat}}^2 + \mathbf{S}_{\text{control}}^2)/2}}
+```
 
 The vectors \(\mathbf{x}_{\text{treat}}\) and \(\mathbf{x}_{\text{control}} \in \mathbb{R}^D\) represent the vectors of \(D\) covariates of the treated group and control group, respectively.
 
 The sample means \(\mathbf{\mu}_{\text{treat}}\) and \(\mathbf{\mu}_{\text{control}}\) are calculated for each group, and \(\mathbf{S}_{\text{treat}}^2\) and \(\mathbf{S}_{\text{control}}^2\) represent their sample variances.
 
 In the Inverse Probability of Treatment Weighting (IPTW) framework, the weighted sample mean \(\mathbf{\mu}_w\) and sample variance \(\mathbf{S}_w^2\) are calculated as follows:
-```
+
 
 ### Cox proportional hazard model
 
