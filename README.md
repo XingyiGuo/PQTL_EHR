@@ -67,15 +67,15 @@ The vectors $\mathbf{x}\_{treat}$ and $\mathbf{x}\_{control}$ in $\mathbb{R}^D$ 
 In the Inverse Probability of Treatment Weighting (IPTW) framework, the weighted sample mean $\mathbf{mu}\_w$ and sample variance $\mathbf{mu}\_w\^2$ are calculated as follows:
 
 ```math
-\mathbf{\mu}_w = \frac{\sum{\mathbf{w}_i \mathbf{x}_i}}{\sum \mathbf{w}_i}
+\mathbf{\mu}_w = \frac{\sum{\mathbf{w}_i \mathbf{x}_i}}{\sum \mathbf{w}_i};
 
 \mathbf{S}_w^2 = \frac{\sum \mathbf{w}_i}{\left(\sum \mathbf{w}_i\right)^2 - \sum \mathbf{w}_i^2} \sum{\mathbf{w}_i \left(\mathbf{x}_i - \mathbf{\mu}_w\right)^2} (Eq.4)
 ```
 
 Number of unbalanced covariates are calculated as following:
-
-$n = \sum_{d=1}^{D} \mathbb{1}\left[SMD\left(d\right)>0.1\right]  (Eq.5)$
-
+```math
+n = \sum_{d=1}^{D} \mathbb{1}\left[SMD\left(d\right)>0.1\right]  (Eq.5)
+```
 ### Cox proportional hazard model
 
 
