@@ -49,76 +49,17 @@ if(gwas_exsits){
 	stop
 }
 
-
-##tsname= args[1]#for non tissue specific 
 system.time(for(i in 1:dim(ea.sig)[1]){
 	print(i)
 	pnames <- ea.sig[i,19]
 	tsname <- ea.sig[i,1] #tissue specific proteins
 	print(paste0(tsname, "_", pnames))
 	
-	eqtls_exsits=FALSE
 	pqtls_exsits=FALSE
 	
-	pph4_pqtlseqtls <- NULL
 	pph4_pqtlsgwas <- NULL
-	
-	##Part 1: pQTLs and eQTLs colocalization
-	if (file.exists(paste0("/eqlts_pqtls_tss500k_refine/",tsname,"/",pnames,".all.pqtls.csv"))){pqtls_exsits=TRUE}
-	
-	if (file.exists(paste0("/eqtls_193proteins/",tsname, "/",pnames,".eqtls.csv"))){eqtls_exsits=TRUE}
-	
-	if(eqtls_exsits && pqtls_exsits){
-		print("reading eqtls")
-		eqtls = fread(paste0("/eqtls_193proteins/",tsname, "/",pnames,".eqtls.csv"),sep=",")
-		eqtls = eqtls[complete.cases(eqtls), ]
-		eqtls = eqtls[eqtls$maf<1, ]
-		eqtls = eqtls[eqtls$maf>0.01, ]
-		
-	    print("reading pqtls")
-		pqtls = fread(paste0("/eqlts_pqtls_tss500k_refine/",tsname,"/",pnames,".all.pqtls.csv"),sep=",")
-		pqtls = pqtls[complete.cases(pqtls), ]
-		pqtls = pqtls[pqtls$ImpMAF<1, ]
-		pqtls = pqtls[pqtls$ImpMAF>=0.01, ]
-		
-		#order by variant_id
-		eqtls= eqtls[order(eqtls$rsids),]
-		pqtls= pqtls[order(pqtls$rsids),]
-	
-		common = intersect(as.character(pqtls$rsids),as.character(eqtls$rsids))
-		print(length(common))
-		if(length(common)>0){
-			eqtls.1 = eqtls[match(as.character(common),as.character(eqtls$rsids)),]
-			pqtls.1 = pqtls[match(as.character(common),as.character(pqtls$rsids)),]
 
-			# print(eqtls.1[!complete.cases(eqtls.1),])
-			# print(pqtls.1[!complete.cases(pqtls.1),])
-			pqtls.1$N <- gsub("nocommon.*", pqtls.1$N[1], pqtls.1$N)
-			
-			ds1 = list(eqtls.1$rsids, as.numeric(eqtls.1$N), as.numeric(eqtls.1$pval_nominal), as.numeric(eqtls.1$maf))
-			names(ds1) = c("snp","N","pvalues","MAF")
-			ds2 = list(pqtls.1$rsids,as.numeric(pqtls.1$N), as.numeric(pqtls.1$meta_Pvalue), as.numeric(pqtls.1$ImpMAF))
-			names(ds2) = c("snp","N","pvalues","MAF")
-
-			ds1$snp = as.character(ds1$snp)
-			ds2$snp = as.character(ds2$snp);
-			ds1$type = ds2$type = "quant"
-			c1 = coloc.abf(ds1, ds2)
-			pph4_pqtlseqtls <- rbind(pph4_pqtlseqtls,c1$summary[-1])
-			write.table(pph4_pqtlseqtls,paste0("/coloc_res_eqtls_pqtls_tss500k/",tsname, ".",pnames,".pqtlseqtls.coloc.txt"),col.names = T,row.names = F,quote = F)
-		}else{
-			print("No common rs found among two datasets")
-		}
-	}else if (pqtls_exsits){
-		print("eqtls does not exist")
-	}else if(eqtls_exsits){
-		print("pqtls does not exist")
-	}else{
-		print("Neither pqtls nor eqtls exist")
-	}
-
-	##Part 2: pQTLs and GWAS colocalization
-	if (file.exists(paste0("/gwas_pqtls_rs50k_refine/",tsname,"/",pnames,".all.pqtls.csv"))){pqtls_exsits=TRUE}
+	##Part 1: pQTLs and GWAS colocalization
 	if (file.exists(paste0(d[[cur_tsname]], '_dbSNPs_impute_summary_statistic_polyfun.txt'))){gwas_exsits=TRUE}
 	
 	if (gwas_exsits && pqtls_exsits){
