@@ -8,7 +8,7 @@ In this work, we integrate large GWAS data for breast, colorectal, lung, ovarian
 
 **Step2:** Annotate the identified cancer risk proteins using drug information from DrugBank, ChEMBL, the Therapeutic Target Database, and OpenTargets. Identify druggable proteins that are either therapeutic targets of approved drugs or are undergoing clinical trials.
 
-**Step3** Utilize electronic health records from VUMC to emulate treated-control drug trials for drugs approved for indications other than cancer. Apply the Inverse Probability of Treatment Weighting framework and use the Cox proportional hazard model to evaluate the cancer risk.
+**Step3：** Utilize electronic health records from VUMC to emulate treated-control drug trials for drugs approved for indications other than cancer. Apply the Inverse Probability of Treatment Weighting framework and use the Cox proportional hazard model to evaluate the cancer risk.
 
 ## Methods
 ### Meta
@@ -76,13 +76,18 @@ Number of unbalanced covariates are calculated as following:
 ```math
 n = \sum_{d=1}^{D} \mathbb{1}\left[SMD\left(d\right)>0.1\right]  (Eq.5)
 ```
+
+- Executive code: IPTW_and_survival_model.ipynb 
 ### Cox proportional hazard model
 Survival analyses were conducted to assess subjects' cancer risk in balanced treated-control trials. We employ a weighted Cox proportional hazard model using the lifelines (Python package, 0.28.0) to evaluate the hazard ratio of cancer development for patients on treated drugs compared to control drugs. Time windows extend from drug prescription to cancer diagnosis or the end of electronic health record (EHR) records. Unbalanced covariates are incorporated into the Cox models. For treated drugs, overall hazard ratios and p-values are obtained via random effect meta-analysis with meta (R package, 7.0). Significance is determined based on a Bonferroni-corrected p-value threshold of 0.05 (nominal *P* = 3.5 x 10^-3 corresponding to 14 tests).
+
+- Executive code: IPTW_and_survival_model.ipynb 
 
 ### Figures
 - ./Figures/Figure4.tgz
 - ./Figures/Figure5.tgz
 - ./Figures/FigureS3.tgz
+- ./Figures/Meta_analysis_and_KM_curve.ipynb
 
 ## Contact
 Qing Li: qing.li@vumc.org
