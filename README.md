@@ -56,15 +56,17 @@ and the stabilized IPTW of each individual is calculated as follows:
 ```math
 \mathbf{w} = \frac{\mathbf{Z} \times P(\mathbf{Z}=1)}{P(\mathbf{Z}=1 \mid \mathbf{X})} + \frac{(1 - \mathbf{Z}) \times (1 - P(\mathbf{Z}=1))}{1 - P(\mathbf{Z}=1 \mid \mathbf{X})}  (Eq.2)
 ```
-The Standardized Mean Difference (SMD) between the treated group (\(x_{\text{treat}}\)) and the control group (\(x_{\text{control}}\)) is calculated using the formula:
+The Standardized Mean Difference (SMD) between the treated group (`x_treat`) and the control group (`x_control`) is calculated using the formula:
 
-\[
-\text{SMD}(x_{\text{treat}} - x_{\text{control}}) = \frac{|\mu_{\text{treat}} - \mu_{\text{control}}|}{\sqrt{(\mathbf{S}_{\text{treat}}^2 + \mathbf{S}_{\text{control}}^2)/2}}
-\]
+```math
+SMD(x_{\text{treat}} - x_{\text{control}}) = \frac{|\mu_{\text{treat}} - \mu_{\text{control}}|}{\sqrt{(\mathbf{S}_{\text{treat}}^2 + \mathbf{S}_{\text{control}}^2)/2}}
 
-Here, \(\mu_{\text{treat}}\) and \(\mu_{\text{control}}\) represent the means of the treated and control groups, respectively, and \(\mathbf{S}_{\text{treat}}^2\) and \(\mathbf{S}_{\text{control}}^2\) represent their variances.
+The vectors \(\mathbf{x}_{\text{treat}}\) and \(\mathbf{x}_{\text{control}} \in \mathbb{R}^D\) represent the vectors of \(D\) covariates of the treated group and control group, respectively.
 
+The sample means \(\mathbf{\mu}_{\text{treat}}\) and \(\mathbf{\mu}_{\text{control}}\) are calculated for each group, and \(\mathbf{S}_{\text{treat}}^2\) and \(\mathbf{S}_{\text{control}}^2\) represent their sample variances.
 
+In the Inverse Probability of Treatment Weighting (IPTW) framework, the weighted sample mean \(\mathbf{\mu}_w\) and sample variance \(\mathbf{S}_w^2\) are calculated as follows:
+```
 
 ### Cox proportional hazard model
 
