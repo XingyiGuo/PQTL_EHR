@@ -1,0 +1,5 @@
+MolecularBrandName,concept_name,ingredient_concept_id,type
+Atorvastatin,Atorvastatin,1001,treat
+Simvastatin,Simvastatin,1002,control
+Rosuvastatin,Rosuvastatin,1003,control
+Pravastatin,Pravastatin,1004,control
